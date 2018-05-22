@@ -13,12 +13,6 @@ Tile::~Tile()
 {
 }
 
-//enum typos { Sea, Ship, Hit, Miss };
-//struct coords
-//{
-//	int x;
-//	int y;
-//};
 
 void Tile::setType(typos new_t)
 {
@@ -34,29 +28,25 @@ typos Tile::getType()
 
 coords Tile::getCoords()
 {
-	coords c;
-	c.x = 5;
-	c.y = 2;
-	return c;
+	
+	return this->c;
 }
 
 void Tile::setCoords(int new_x, int new_y)
 {
-	coords c;
-	c.x = new_x;
-	c.y = new_y;
+	this->c.x = new_x;
+	this->c.y = new_y;
 }
 
 void Tile::draw(bool hidden)
 {
-	typos t = Sea;
-	switch (t)
+	switch (this->t)
 	{
 	case Sea:
 		cout << "~";
 		break;
 	case Ship:
-		if (hidden == 1) cout << "~";
+		if (hidden == true) cout << "~";
 		else cout << "s";
 		break;
 	case Hit:
@@ -68,6 +58,4 @@ void Tile::draw(bool hidden)
 	default:
 		break;
 	}
-
-	return;
 }

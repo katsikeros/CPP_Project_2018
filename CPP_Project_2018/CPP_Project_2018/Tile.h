@@ -14,11 +14,6 @@ public:
 	Tile();
 	~Tile();
 
-	
-	
-	coords c;
-	typos t;
-
 	typos getType();
 
 	void setType(typos new_t);
@@ -28,6 +23,10 @@ public:
 	void setCoords(int new_x, int new_y);
 
 	void draw(bool hidden);
+
+private:
+	coords c;
+	typos t;
 };
 
 
