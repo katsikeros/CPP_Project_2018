@@ -9,7 +9,7 @@ public:
 
 	int getSize();
 
-protected:
-	int size;
+//protected:
+	//int size;
 };
 
