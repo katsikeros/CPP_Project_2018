@@ -102,7 +102,7 @@ void Board::placeAllships() {
 		
 		if ( i == 0 ) {
 		 sub1.placeShip(start, rand_orient, this->my_board, 1);
-		}
+		} 
 		else if ( i ==1 ) { bat1.placeShip(start, rand_orient, this->my_board, 1); }
 		else if (i == 2) { destr1.placeShip(start, rand_orient, this->my_board, 1);  }
 		else if (i == 3) { crus1.placeShip(start, rand_orient, this->my_board, 1);  }
