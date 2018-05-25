@@ -10,6 +10,6 @@ public:
 	int getSize();
 
 protected:
-	int size;
+	//int size;
 };
 

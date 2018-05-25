@@ -1,5 +1,7 @@
 #pragma once
 
+#define SHIP_NUM 5
+
 enum typos { Sea, Ship, Hit, Miss };
 
 struct coords
