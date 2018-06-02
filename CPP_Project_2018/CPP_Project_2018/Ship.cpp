@@ -1,13 +1,39 @@
 #include "stdafx.h"
 #include <iostream>
+#include <vector>
+#include <exception>
 #include "Ship.h"
 #include "Board.h"
 
 using namespace std;
 
-namespace Ship_space{
+namespace Ship_space{//ginetai giati ean vazame ws orisma se sinartisi to Ship to eperne ws tin sinartisi Ship
 	enum typos { Sea, Ship, Hit, Miss };
 }
+
+class OversizeException : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Ship is out of the Board";
+	}
+};
+
+class OverlapTilesException : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Ship was placed on top of another one";
+	}
+};
+
+class AdjacentTilesException : public exception
+{
+	virtual const char* what() const throw()
+	{
+		return "Ship osculates on another one";
+	}
+};
 
 Ship::Ship()
 {
@@ -20,77 +46,60 @@ Ship::~Ship()
 
 bool Ship::placeShip(Tile start, bool orientation, Tile board[7][7], bool verbose)
 {
-	coords my_c = start.getCoords();
-	
-	
-	cout<<endl << " ********** placeShip ********** " << endl;
-	
-	cout << endl << " ( " << my_c.x << " , " << my_c.y <<" )    size = " << this->size;
-	
-	if ( orientation == 1 ) {
-		cout << " oriented right " << endl << endl;
-	}
-	else {
-		cout << "  oriented down " << endl << endl;
-	}
-	
+	try {
+		coords my_c = start.getCoords();
 
-	if (my_c.x < 0 || my_c.x > 6 || my_c.y < 0 || my_c.y > 6)
+
+		if (my_c.x < 0 || my_c.x > 6 || my_c.y < 0 || my_c.y > 6)//CHeck if starting tile is in the board
+		{
+			cout << "Starting Tile is out of the board" << endl;
+			return false;
+		}
+
+		for (int i = 0; i < this->size; i++)//exceptions 
+		{
+			if (orientation == 1)//vertical
+			{
+				if (my_c.x + i > 6) throw OversizeException();//Ship out of board
+				if (board[my_c.x + i][my_c.y].getType() == (typos)Ship_space::Ship) throw OverlapTilesException();//Ship ontop of another one
+
+				vector <coords> temp = Board::getAdjacentTiles({ my_c.x + i , my_c.y});//pairnoume kathe fora ta gitonika tou epomenou Tile tou ship
+				for (int j = 0; j < temp.size(); j++)
+				{
+					if (board[temp[j].x][temp[j].y].getType() == (typos)Ship_space::Ship)
+					{
+						throw AdjacentTilesException();//Ship near another one
+					}
+				}
+			}
+			else//horizontal
+			{
+				if (my_c.y + i > 6) throw OversizeException();
+				if (board[my_c.x][my_c.y + i].getType() == (typos)Ship_space::Ship) throw OverlapTilesException();
+
+				vector <coords> temp = Board::getAdjacentTiles({ my_c.x , my_c.y + i});
+				for (int j = 0; j < temp.size(); j++)
+				{
+					if (board[temp[j].x][temp[j].y].getType() == (typos)Ship_space::Ship)
+					{
+						throw AdjacentTilesException();
+					}
+				}
+			}
+
+		}
+		
+		if (orientation == 1) for (int i = 0; i < this->size; i++) board[my_c.x + i][my_c.y].setType((typos)Ship_space::Ship); // vertical
+		else if (orientation == 0) for (int i = 0; i < this->size; i++) board[my_c.x][my_c.y + i].setType((typos)Ship_space::Ship); // horizontal
+
+	}
+	catch (exception& e)
 	{
-		cout << "Starting Tile is out of the board" << endl;
+		if (verbose == true) cout << e.what() << endl;
 		return false;
 	}
 
-	int temp_x = my_c.x, temp_y = my_c.y;
 
-	if (orientation == 1 && my_c.x <=4 ) {
-		
-		for (int i = 0; i < this->size; i++) {
-
-			if ( board[temp_x][temp_y].getType() == Sea) {
-				temp_x = temp_x + 1;
-				
-			}
-			else {
-				return 0;
-			}
-		}
-		temp_x = my_c.x;
-		
-		for (int i = 0; i < this->size; i++) {
-			
-			if ( board[temp_x][temp_y].getType() == Sea) {
-				cout << " tempx = " << temp_x << "     temp_y = " << temp_y << endl;
-				board[temp_x][temp_y].setType((typos)Ship_space::Ship);
-				temp_x = temp_x + 1;
-			}
-		}
-
-	}
-	else if (orientation == 0 && my_c.y <= 4) {
-		for (int i = 0; i < this->size; i++) {
-
-			if (board[temp_x][temp_y].getType() == Sea) {
-				temp_y = temp_y + 1;
-			}
-			else {
-				return 0;
-			}
-		}
-		temp_y = my_c.y;
-
-		for (int i = 0; i < this->size; i++) {
-
-			if (board[temp_x][temp_y].getType() == Sea) {
-				cout << " tempx = " << temp_x << "     temp_y = " << temp_y << endl;
-				board[temp_x][temp_y].setType((typos)Ship_space::Ship);
-				temp_y = temp_y + 1;
-			}
-		}
-	}
-	
-	
-	cout << " ******************************* " <<endl<< endl;
-	return 1;
+	return true;
 
 }

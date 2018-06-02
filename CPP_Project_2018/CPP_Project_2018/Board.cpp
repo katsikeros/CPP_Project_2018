@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
+#include <vector>
 #include <time.h>       /* time */
 #include "Ship.h"
 #include "Board.h"
@@ -32,7 +33,18 @@ Board::~Board()
 {
 }
 
-void Board::drowboards()
+Tile Board::getBoardTile(int x, int y)
+{
+	return this->my_board[x][y];
+}
+
+void Board::setBoardTile(int x, int y, typos t)
+{
+	this->my_board[x][y].setType(t);
+}
+
+
+void Board::drawboards(Tile my_board[7][7], Tile op_board[7][7])
 {
 	cout << "-  -  Y  O  U  -  -      -  O  P  P  O  N  E  N  T  -" << endl;
 	cout << "  0  1  2  3  4  5  6        0  1  2  3  4  5  6" << endl;
@@ -42,26 +54,26 @@ void Board::drowboards()
 		cout << i << " ";
 		for (j = 0; j <= 6; j++)
 		{
-			this->my_board[i][j].draw(false);
+			my_board[i][j].draw(false);
 			cout << "  ";
 		}
 		cout << "    " << i << " ";;
 		for (j = 0; j <= 6; j++)
 		{
-			this->op_board[i][j].draw(true);
+			op_board[i][j].draw(false);
 			cout << "  ";
 		}
 		cout << endl;
 	}
 }
 
-coords* Board::getAdjacentTiles(coords tile)
+vector <coords> Board::getAdjacentTiles(coords tile)
 {
-	coords adjacent[4] = { NULL };
-	adjacent[0] = { tile.x - 1, tile.y };
-	adjacent[1] = { tile.x + 1, tile.y };
-	adjacent[2] = { tile.x, tile.y + 1 };
-	adjacent[3] = { tile.x, tile.y - 1 };
+	vector <coords> adjacent;
+	if (tile.x - 1 >= 0) adjacent.push_back({ tile.x - 1, tile.y });
+	if (tile.x + 1 < 7) adjacent.push_back({ tile.x + 1, tile.y });
+	if (tile.y + 1 < 7) adjacent.push_back({ tile.x, tile.y + 1 });
+	if (tile.y - 1 >= 0) adjacent.push_back({ tile.x, tile.y - 1 });
 	return adjacent;
 }
 
@@ -90,26 +102,37 @@ void Board::placeAllships() {
 	Cruiser crus1;
 	Carrier car1;
 
-	srand(2);
-	int rand_x , rand_y , rand_orient;
+	srand(time(NULL));
+	int rand_x , rand_y , rand_orient, placedCount = 0;
 	Tile start;
 
-	for (int i = 0; i < SHIP_NUM; i++) {
+	while (placedCount < 5) {
 		rand_x = rand() % 7;
 		rand_y = rand() % 7;
 		rand_orient = rand() % 2;
-		start.setCoords( rand_x , rand_y );
-		
-		if ( i == 0 ) {
-		 sub1.placeShip(start, rand_orient, this->my_board, 1);
-		} 
-		else if ( i ==1 ) { bat1.placeShip(start, rand_orient, this->my_board, 1); }
-		else if (i == 2) { destr1.placeShip(start, rand_orient, this->my_board, 1);  }
-		else if (i == 3) { crus1.placeShip(start, rand_orient, this->my_board, 1);  }
-		else if (i == 4) { car1.placeShip(start, rand_orient, this->my_board, 1);  }
+		start.setCoords(rand_x, rand_y);
 
+		//Trying to place Ship one by one from biggest to smallest (more chances it won't fail). If one is placed go to the next one
+		switch (placedCount)
+		{
+		case 0:
+			if (car1.placeShip(start, rand_orient, this->my_board, false) == true) placedCount++;
+			break;
+		case 1:
+			if (bat1.placeShip(start, rand_orient, this->my_board, false) == true) placedCount++;
+			break;
+		case 2:
+			if (crus1.placeShip(start, rand_orient, this->my_board, false) == true) placedCount++;
+			break;
+		case 3:
+			if (sub1.placeShip(start, rand_orient, this->my_board, false) == true) placedCount++;
+			break;
+		case 4:
+			if (destr1.placeShip(start, rand_orient, this->my_board, false) == true) placedCount++;
+			break;
+		default:
+			break;
+		}
 
-		this->drowboards();
-		
 	}
 }

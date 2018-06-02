@@ -9,9 +9,8 @@ public:
 	~Ship();
 
 	//Tile start;
-	//bool orientation; //0 horizontal, 1 vertical
 
 	int size;
 
-	bool placeShip(Tile start, bool orientation, Tile board[7][7], bool verbose);
+	bool placeShip(Tile start, bool orientation, Tile board[7][7], bool verbose);//1 vertical, 0 horizontal, verbose true -> print exceptions, else not
 };
