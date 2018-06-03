@@ -12,6 +12,7 @@ public:
 	~Player();
 
 	Board board;
+	string name;
 
 	void placeAllShips();
 	bool placeShip(string ship, Tile start, bool orient);
@@ -19,7 +20,6 @@ public:
 	void getStats();
 
 private:
-	string name;
-	int throws, misses, hits, repeats;
+	int throws = 0, misses = 0, hits = 0, repeats = 0;
 };
 

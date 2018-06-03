@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Board">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEgAAAAAACAAAAIAAAAAAAQAAAAAAAAAAAQEAiAAAAA=</HashCode>
+      <FileName>Board.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carrier">
+    <Position X="5.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Carrier.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ship">
+    <Position X="8.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIIAAAAAAQCAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Ship.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cruiser">
+    <Position X="11.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAABAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Cruiser.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tile">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAEAAAAAAIAAAAAARAAAACAAAQAACAAAQA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAEAAAAAAAAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Battleship.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Destroyer">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Destroyer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player">
+    <Position X="13.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEABQAAAAAAAAAAAAIAAAAAAAQEAAAAJAAEAQEAABA=</HashCode>
+      <FileName>Player.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Submarine">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Submarine.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="coords">
+    <Position X="1.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="typos">
+    <Position X="3.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAABAAAAAIAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Tile.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

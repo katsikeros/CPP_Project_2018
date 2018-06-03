@@ -21,6 +21,5 @@ public:
 
 private:
 	bool hidden;
-	Tile op_board[7][7];
 };
 
