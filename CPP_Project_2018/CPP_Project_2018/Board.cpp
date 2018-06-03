@@ -21,8 +21,6 @@ Board::Board()
 		{
 			this->my_board[i][j].setCoords(i,j);
 			this->my_board[i][j].setType(Sea);
-			this->op_board[i][j].setCoords(i, j);
-			this->op_board[i][j].setType(Sea);
 		}
 
 	}
@@ -46,7 +44,7 @@ void Board::setBoardTile(int x, int y, typos t)
 
 void Board::drawboards(Tile my_board[7][7], Tile op_board[7][7])
 {
-	cout << "-  -  Y  O  U  -  -      -  O  P  P  O  N  E  N  T  -" << endl;
+	cout << endl << "-  -  Y  O  U  -  -      -  O  P  P  O  N  E  N  T  -" << endl;
 	cout << "  0  1  2  3  4  5  6        0  1  2  3  4  5  6" << endl;
 	int i, j;
 	for (i = 0; i <= 6; i++)
@@ -60,7 +58,7 @@ void Board::drawboards(Tile my_board[7][7], Tile op_board[7][7])
 		cout << "    " << i << " ";;
 		for (j = 0; j <= 6; j++)
 		{
-			op_board[i][j].draw(false);
+			op_board[i][j].draw(true);
 			cout << "  ";
 		}
 		cout << endl;
@@ -79,18 +77,16 @@ vector <coords> Board::getAdjacentTiles(coords tile)
 
 bool Board::allShipsSunk()//Counts ships in both boards, if one of them doesn't have any left, returns true
 {
-	int i, j,count_my = 0 ,count_op = 0;  
+	int i, j, count_my = 0;
 	for (i = 0; i <= 6; i++)
 	{
 		for (j = 0; j <= 6; j++)
 		{
 			if (this->my_board[i][j].getType() == Ship) count_my++;
-			if (this->op_board[i][j].getType() == Ship) count_op++;
 		}
 
 	}
-
-	if (count_my == 0 || count_op == 0) return true;
+	if (count_my == 0) return true;
 	else return false;
 }
 
@@ -102,11 +98,12 @@ void Board::placeAllships() {
 	Cruiser crus1;
 	Carrier car1;
 
-	srand(time(NULL));
-	int rand_x , rand_y , rand_orient, placedCount = 0;
+
+	int rand_x, rand_y, rand_orient, placedCount = 0;
 	Tile start;
 
 	while (placedCount < 5) {
+		
 		rand_x = rand() % 7;
 		rand_y = rand() % 7;
 		rand_orient = rand() % 2;

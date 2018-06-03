@@ -152,6 +152,7 @@
     <ClInclude Include="Carrier.h" />
     <ClInclude Include="Cruiser.h" />
     <ClInclude Include="Destroyer.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Submarine.h" />
@@ -165,6 +166,7 @@
     <ClCompile Include="CPP_Project_2018.cpp" />
     <ClCompile Include="Cruiser.cpp" />
     <ClCompile Include="Destroyer.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -174,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="Submarine.cpp" />
     <ClCompile Include="Tile.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
